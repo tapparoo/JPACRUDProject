@@ -11,21 +11,22 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.skilldistillery.snakes.data.SnakeDAO;
 import com.skilldistillery.snakes.data.SnakeDAOImpl;
+import com.skilldistillery.snakes.data.SpeciesDAO;
+import com.skilldistillery.snakes.data.SpeciesDAOImpl;
 
-@DisplayName("Snake Tests")
-class SnakeTest {
-	SnakeDAO dao;
+@DisplayName("Species Tests")
+class SpeciesTest {
+	SpeciesDAO dao;
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		SnakeDAOImpl.closeEMF();
+		SpeciesDAOImpl.closeEMF();
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
-		dao = new SnakeDAOImpl();
+		dao = new SpeciesDAOImpl();
 	}
 
 	@AfterEach
@@ -34,12 +35,11 @@ class SnakeTest {
 	}
 	
 	@Test
-	void test_getSnakeById_returns_correct_Snake() {
-		assertEquals("Bertha", dao.getSnakeById(1).getName());
-		assertEquals(157, dao.getSnakeById(1).getLengthInCM());
-		assertEquals(6950, dao.getSnakeById(1).getWeightInGrams());
+	void test_getSpeciesById_returns_correct_Species() {
+		assertEquals("Ball Python", dao.getSpeciesById(5).getName());
+		assertEquals("Python regius", dao.getSpeciesById(5).getSpecies());
 		
-		assertNull(dao.getSnakeById(44));
+		assertNull(dao.getSpeciesById(44));
 	}
 
 	@Disabled

@@ -9,6 +9,7 @@
     </provider>
 
 	<class>com.skilldistillery.snakes.entities.Snake</class>
+	<class>com.skilldistillery.snakes.entities.Species</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/snakedb?useSSL=false" />

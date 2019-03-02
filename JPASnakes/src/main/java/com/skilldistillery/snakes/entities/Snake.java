@@ -12,7 +12,9 @@ public class Snake {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String name, genus, species, morph, image;
+	private String name, morph;
+	@Column(name="image_url")
+	private String imageURL;
 	
 	@Column(name="purchased_from")
 	private String purchasedFrom;
@@ -22,8 +24,6 @@ public class Snake {
 	
 	@Column(name="weight_in_grams")
 	private double weightInGrams;
-	
-	public Snake() {}
 
 	public int getId() {
 		return id;
@@ -41,22 +41,6 @@ public class Snake {
 		this.name = name;
 	}
 
-	public String getGenus() {
-		return genus;
-	}
-
-	public void setGenus(String genus) {
-		this.genus = genus;
-	}
-
-	public String getSpecies() {
-		return species;
-	}
-
-	public void setSpecies(String species) {
-		this.species = species;
-	}
-
 	public String getMorph() {
 		return morph;
 	}
@@ -65,12 +49,12 @@ public class Snake {
 		this.morph = morph;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImageURL() {
+		return imageURL;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 
 	public String getPurchasedFrom() {
@@ -99,9 +83,8 @@ public class Snake {
 
 	@Override
 	public String toString() {
-		return "Snake [id=" + id + ", name=" + name + ", genus=" + genus + ", species=" + species + ", morph=" + morph
-				+ ", image=" + image + ", purchasedFrom=" + purchasedFrom + ", lengthInCM=" + lengthInCM
-				+ ", weightInGrams=" + weightInGrams + "]";
+		return "Snake [id=" + id + ", name=" + name + ", morph=" + morph + ", imageURL=" + imageURL + ", purchasedFrom="
+				+ purchasedFrom + ", lengthInCM=" + lengthInCM + ", weightInGrams=" + weightInGrams + "]";
 	}
 }
 
