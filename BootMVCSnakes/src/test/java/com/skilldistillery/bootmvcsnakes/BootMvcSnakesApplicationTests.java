@@ -1,4 +1,4 @@
-package com.skilldistillery.snakes;
+package com.skilldistillery.bootmvcsnakes;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

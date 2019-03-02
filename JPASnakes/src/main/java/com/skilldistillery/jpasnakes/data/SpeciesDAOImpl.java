@@ -1,15 +1,14 @@
-package com.skilldistillery.snakes.data;
+package com.skilldistillery.jpasnakes.data;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
-import com.skilldistillery.snakes.entities.Snake;
-import com.skilldistillery.snakes.entities.Species;
+import com.skilldistillery.jpasnakes.entities.Species;
 
 public class SpeciesDAOImpl implements SpeciesDAO {
-	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPASnakes");
+	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("snakeEntities");
 	
 	public static void closeEMF() {
 		emf.close();

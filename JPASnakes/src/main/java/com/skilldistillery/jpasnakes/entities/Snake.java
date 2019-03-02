@@ -1,10 +1,14 @@
-package com.skilldistillery.snakes.entities;
+package com.skilldistillery.jpasnakes.entities;
+
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Snake {
@@ -12,7 +16,15 @@ public class Snake {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name="species_id")
+	private int speciesId;
+	
 	private String name, morph;
+	
+	@ManyToOne
+    @JoinColumn(name="species_id", insertable=false, updatable=false)
+	private Species species;
+	
 	@Column(name="image_url")
 	private String imageURL;
 	
@@ -24,6 +36,9 @@ public class Snake {
 	
 	@Column(name="weight_in_grams")
 	private double weightInGrams;
+	
+	@Column(name="date_of_birth")
+	private LocalDate dateOfBirth;
 
 	public int getId() {
 		return id;
@@ -80,11 +95,37 @@ public class Snake {
 	public void setWeightInGrams(double weightInGrams) {
 		this.weightInGrams = weightInGrams;
 	}
+	
+	public int getSpeciesId() {
+		return speciesId;
+	}
+
+	public void setSpeciesId(int speciesId) {
+		this.speciesId = speciesId;
+	}
+	
+
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	
+	public Species getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(Species species) {
+		this.species = species;
+	}
 
 	@Override
 	public String toString() {
-		return "Snake [id=" + id + ", name=" + name + ", morph=" + morph + ", imageURL=" + imageURL + ", purchasedFrom="
-				+ purchasedFrom + ", lengthInCM=" + lengthInCM + ", weightInGrams=" + weightInGrams + "]";
+		return "Snake [id=" + id + ", speciesId=" + speciesId + ", name=" + name + ", morph=" + morph + ", imageURL="
+				+ imageURL + ", purchasedFrom=" + purchasedFrom + ", lengthInCM=" + lengthInCM + ", weightInGrams="
+				+ weightInGrams + ", dateOfBirth=" + dateOfBirth + "]";
 	}
 }
 
