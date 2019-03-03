@@ -22,3 +22,5 @@ Users can also:
 ![Filter Dropdown](BootMVCSnakes/src/main/webapp/images/index-filterDropdown.png)
 
 ![Snake Details](BootMVCSnakes/src/main/webapp/images/snakeDetails.png)
+
+![DB Model](BootMVCSnakes/src/main/webapp/images/snakedb_model.png)
