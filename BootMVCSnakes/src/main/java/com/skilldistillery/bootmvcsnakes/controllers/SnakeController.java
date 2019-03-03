@@ -29,7 +29,6 @@ public class SnakeController {
 
 	@RequestMapping(path = "FilterTable.do", method = RequestMethod.GET)
 	public String filter(Model model, @RequestParam("tableFilterOption")String option) {
-		System.out.println(option);
 		model.addAttribute("allSnakes", dao.getAllSnakes());
 		model.addAttribute("allSpecies", dao.getAllSpecies());
 		model.addAttribute("filteredSnakes", dao.getSnakesBySpeciesAsString(option));

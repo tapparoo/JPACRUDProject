@@ -120,7 +120,7 @@
 									placeholder="Default ${snake.species.name} image is being used">${snake.imageURL}</textarea>
 							</div>
 						</div>
-						<br> <br>
+						<br>
 						<c:if test="${not empty result }"><div class="row result"><div class="col-12">${result }</div></div></c:if>
 						<div class="row">
 							<div class="col-12">
