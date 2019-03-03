@@ -12,10 +12,13 @@ Users can also:
 - Spring Boot MVC
   - JavaServer Pages (JSPs), Java Standard Tag Library (JSTL), Java Persistence Query Language (JPQL), Post/Redirect/Get (PRG)
 - SQL/mySQL
-  - ManyToOne (Pre-defined 'Species' table with default images)
+  - ManyToOne (An additional 'Species' table contains default images)
 - Gradle (Build/Dependency Management)
 - Bootstrap (Front-End)
 
+
 ![Add Record Dropdown](BootMVCSnakes/src/main/webapp/images/index-addRecordDropdown.png)
+
 ![Filter Dropdown](BootMVCSnakes/src/main/webapp/images/index-filterDropdown.png)
+
 ![Snake Details](BootMVCSnakes/src/main/webapp/images/snakeDetails.png)
