@@ -25,10 +25,11 @@
 					<form action="modifySnake.do" method="POST">
 						<div class="row">
 							<div class="col-2">
-								<button class="btn btn-sm btn-secondary" id="greenButton" formaction="/" formmethod="GET">Home</button>
+								<button class="btn btn-sm btn-secondary" id="greenButton"
+									formaction="/" formmethod="GET">Home</button>
 							</div>
 							<div class="col-4">
-								<label for="id" class="label-text-align">ID:</label>
+								<label class="label-text-align">ID:</label>
 							</div>
 							<div class="col-6">
 								<input type="text" class="input-text-align" name="id"
@@ -46,7 +47,7 @@
 						</div>
 						<div class="row">
 							<div class="col-6">
-								<label for="species" class="label-text-align">Scientific
+								<label for="species" class="label-text-align">Common
 									Name:</label>
 							</div>
 							<div class="col-5">
@@ -56,6 +57,14 @@
 											<c:if test="${snake.speciesId == species.id }">selected</c:if>>${species.name}</option>
 									</c:forEach>
 								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-6">
+								<label class="label-text-align">Scientific Name:</label>
+							</div>
+							<div class="col-6">
+								<label class="input-text-align">${snake.species.species}</label>
 							</div>
 						</div>
 						<div class="row">
@@ -91,8 +100,9 @@
 								<label for="lengthInCM" class="label-text-align">Length(cm):</label>
 							</div>
 							<div class="col-6">
-								<input type="number" min="0.0" step="0.01" class="input-text-align"
-									name="lengthInCM" value="${snake.lengthInCM}" />
+								<input type="number" min="0.0" step="0.01"
+									class="input-text-align" name="lengthInCM"
+									value="${snake.lengthInCM}" />
 							</div>
 						</div>
 						<div class="row">
@@ -121,7 +131,11 @@
 							</div>
 						</div>
 						<br>
-						<c:if test="${not empty result }"><div class="row result"><div class="col-12">${result }</div></div></c:if>
+						<c:if test="${not empty result }">
+							<div class="row result">
+								<div class="col-12">${result }</div>
+							</div>
+						</c:if>
 						<div class="row">
 							<div class="col-12">
 								<button type="submit" class="btn btn-primary btn-sm">Save
@@ -139,7 +153,8 @@
 							<c:choose>
 								<c:when test="${empty snake.imageURL }">
 									<p>
-										<img src="${snake.species.defaultImageURL}" class="img-fluid rounded">
+										<img src="${snake.species.defaultImageURL}"
+											class="img-fluid rounded">
 									</p>
 								</c:when>
 								<c:otherwise>
@@ -152,7 +167,8 @@
 					</div>
 				</div>
 			</div>
-			<br><br>
+			<br>
+			<br>
 		</c:if>
 	</div>
 
