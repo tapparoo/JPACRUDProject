@@ -1,14 +1,10 @@
 package com.skilldistillery.jpasnakes.entities;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Species {
@@ -17,11 +13,10 @@ public class Species {
 	private int id;
 	private String name, species;
 	
-	@OneToMany(mappedBy = "species", cascade = CascadeType.ALL)
-    private Set<Snake> snakes;
-	
 	@Column(name="default_image_url")
 	private String defaultImageURL;
+	
+	public Species() {}
 
 	public int getId() {
 		return id;
@@ -53,14 +48,6 @@ public class Species {
 
 	public void setDefaultImageURL(String defaultImageURL) {
 		this.defaultImageURL = defaultImageURL;
-	}
-	
-	public Set<Snake> getSnakes() {
-		return snakes;
-	}
-
-	public void setSnakes(Set<Snake> snakes) {
-		this.snakes = snakes;
 	}
 
 	@Override

@@ -19,12 +19,24 @@
 	<div class="container">
 		<c:if test="${not empty snake }">
 			<div class="row">
-				<h1 class="col-12">${species.name }</h1>
+				<h1 class="col-12">${snake.species.name }</h1>
 			</div>
 			<div class="row">
 
-				<div class="col-6">
+				<div class="col-sm-6 col-md-6 col-lg-6">
 					<form action="modifySnake.do" method="POST">
+						<div class="row">
+							<div class="col-2">
+								<button class="btn btn-sm btn-secondary" id="greenButton" formaction="/" formmethod="GET">Home</button>
+							</div>
+							<div class="col-4">
+								<label for="id" class="label-text-align">ID:</label>
+							</div>
+							<div class="col-6">
+								<input type="text" class="input-text-align" name="id"
+									value="${snake.id}" readonly="readonly" size="4" />
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-6">
 								<label for="name" class="label-text-align">Pet Name:</label>
@@ -39,9 +51,13 @@
 								<label for="species" class="label-text-align">Scientific
 									Name:</label>
 							</div>
-							<div class="col-6">
-								<input type="text" class="input-text-align" name="species"
-									value="${species.species}" />
+							<div class="col-5">
+								<select name="speciesId">
+									<c:forEach var="species" items="${allSpecies}">
+										<option value="${species.id}"
+											<c:if test="${snake.speciesId == species.id }">selected</c:if>>${species.name}</option>
+									</c:forEach>
+								</select>
 							</div>
 						</div>
 						<div class="row">
@@ -50,7 +66,7 @@
 									Date:</label>
 							</div>
 							<div class="col-6">
-								<input type="text" class="input-text-align" name="dateOfBirth"
+								<input type="date" class="input-text-align" name="dateOfBirth"
 									value="${snake.dateOfBirth}" />
 							</div>
 						</div>
@@ -68,8 +84,8 @@
 								<label for="weightInGrams" class="label-text-align">Weight(g):</label>
 							</div>
 							<div class="col-6">
-								<input type="text" class="input-text-align" name="weightInGrams"
-									value="${snake.weightInGrams}" />
+								<input type="number" min="0.0" class="input-text-align"
+									name="weightInGrams" step="0.01" value="${snake.weightInGrams}" />
 							</div>
 						</div>
 						<div class="row">
@@ -77,21 +93,37 @@
 								<label for="lengthInCM" class="label-text-align">Length(cm):</label>
 							</div>
 							<div class="col-6">
-								<input type="text" class="input-text-align" name="lengthInCM"
-									value="${snake.lengthInCM}" />
+								<input type="number" min="0.0" step="0.01" class="input-text-align"
+									name="lengthInCM" value="${snake.lengthInCM}" />
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-6">
-								<label for="purchasedFrom" class="label-text-align">Purchased
-									from:</label>
+								<label for="purchasedFrom" class="label-text-align"> <c:if
+										test="${not empty snake.purchasedFrom}">
+										<a href="${snake.purchasedFrom}" target="_blank">
+									</c:if> Purchased from: <c:if test="${not empty snake.purchasedFrom}">
+										</a>
+									</c:if>
+								</label>
 							</div>
 							<div class="col-6">
 								<input type="text" class="input-text-align" name="purchasedFrom"
 									value="${snake.purchasedFrom}" />
 							</div>
 						</div>
-						<br><br>
+						<div class="row">
+							<div class="col-6">
+								<label for="imageURL" class="label-text-align">Image
+									URL:</label>
+							</div>
+							<div class="col-6">
+								<textarea class="input-text-align" name="imageURL"
+									placeholder="Default ${snake.species.name} image is being used">${snake.imageURL}</textarea>
+							</div>
+						</div>
+						<br> <br>
+						<c:if test="${not empty result }"><div class="row result"><div class="col-12">${result }</div></div></c:if>
 						<div class="row">
 							<div class="col-12">
 								<button type="submit" class="btn btn-primary btn-sm">Save
@@ -103,21 +135,26 @@
 						</div>
 					</form>
 				</div>
-				<div class="col-6">
-					<c:choose>
-						<c:when test="${empty snake.imageURL }">
-							<p>
-								<img src="${species.defaultImageURL}" class="img-fluid">
-							</p>
-						</c:when>
-						<c:otherwise>
-							<p>
-								<img src="${snake.imageURL}" class="img-fluid">
-							</p>
-						</c:otherwise>
-					</c:choose>
+				<div class="col-sm-auto col-md-auto col-lg-6">
+					<div class="row">
+						<div class="col">
+							<c:choose>
+								<c:when test="${empty snake.imageURL }">
+									<p>
+										<img src="${snake.species.defaultImageURL}" class="img-fluid rounded">
+									</p>
+								</c:when>
+								<c:otherwise>
+									<p>
+										<img src="${snake.imageURL}" class="img-fluid rounded">
+									</p>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
 				</div>
 			</div>
+			<br><br>
 		</c:if>
 	</div>
 

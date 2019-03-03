@@ -22,7 +22,10 @@
 			<div class="col-4">
 				<h5>Search records by id</h5>
 				<form action="getSnakeById.do" method="GET">
-					<input type="text" name="id" size="5"> <input type="submit">
+					<input type="number" min="1" max="500000"name="id" size="5" required value="0"> <input type="submit">
+					<c:if test="${not empty result }">
+						<br><div class="result">${result}</div>
+					</c:if>
 				</form>
 			</div>
 			<div class="col-4">
@@ -38,7 +41,7 @@
 			<div class="dropdown col-4">
 				<br>
 				<button class="btn dropdown-toggle" type="button"
-					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+					id="greenButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">Add Record</button>
 				<div class="dropdown-menu">
 					<form action="addSnake.do" method="POST" class="px-4 py-3">
@@ -47,15 +50,17 @@
 								class="form-control" name="name">
 						</div>
 						<div class="form-group">
-							<label for="dateOfBirth">Date of Birth</label> <input type="text"
-								class="form-control" name="dateOfBirth" value="2019-01-01">
+							<label for="dateOfBirth">Date of Birth</label> <input type="date"
+								class="form-control" name="dateOfBirth" value="2019-01-01"
+      								min="1990-01-01" max="2030-01-01">
 						</div>
 						<div class="form-group">
-							<label class="hasToolTip" for="speciesId" data-toggle="tooltip"
-								data-html="true"
-								title="<div style='text-align:left'>1 - English<br>2 - Italian<br>3 - Japanese<br>4 - Mandarin<br>5 - French<br>6 - German</div>">Language
-								ID: </label> <input type="text" class="form-control col-4"
-								name="speciesId" value="1">
+							<select name="speciesId">
+									<c:forEach var="species" items="${allSpecies}">
+										<option value="${species.id}"
+											<c:if test="${snake.speciesId == species.id }">selected</c:if>>${species.name}</option>
+									</c:forEach>
+							</select>
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>

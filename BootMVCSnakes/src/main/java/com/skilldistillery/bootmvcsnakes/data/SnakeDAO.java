@@ -9,7 +9,8 @@ public interface SnakeDAO {
 	Snake getSnakeById(int id);
 	Species getSpeciesById(int id);
 	List<Snake> getAllSnakes();
-	Integer addSnake(Snake snake);
+	List<Species> getAllSpecies();
+	Snake addSnake(Snake snake);
 	boolean deleteSnake(Snake snake);
 	boolean modifySnake(Snake snake);
 }

@@ -35,31 +35,59 @@ public class SnakeDAOImpl implements SnakeDAO {
 	}
 
 	@Override
-	public Integer addSnake(Snake snake) {
+	public List<Species> getAllSpecies(){
+		String query = "SELECT species FROM Species species";
+		List<Species> list = em.createQuery(query, Species.class).getResultList();
+		return list;
+	}
+
+	@Override
+	public Snake addSnake(Snake snake) {
 		em.persist(snake);
 		em.flush();
-		return 1;
+		return snake;
 	}
+	
 	
 	@Override
 	public boolean deleteSnake(Snake snake) {
-		em.remove(snake);
+		Snake managed = em.find(Snake.class, snake.getId());
+		
+		if(managed == null) {
+			return false;
+		}
+		
+		em.remove(managed);
+		
+		if(em.find(Snake.class, snake.getId()) != null) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public boolean modifySnake(Snake snake) {
 		Snake managed = em.find(Snake.class, snake.getId());
-		managed.setDateOfBirth(snake.getDateOfBirth().toString());
-		managed.setImageURL(snake.getImageURL());
-		managed.setLengthInCM(snake.getLengthInCM());
-		managed.setMorph(snake.getMorph());
-		managed.setName(snake.getName());
-		managed.setPurchasedFrom(snake.getPurchasedFrom());
-		managed.setSpeciesId(snake.getSpeciesId());
-		managed.setWeightInGrams(snake.getWeightInGrams());
-		em.persist(managed);
-		em.flush();
+		
+		if(managed == null) {
+			return false;
+		}
+		
+		try {
+			managed.setDateOfBirth(snake.getDateOfBirth().toString());
+			managed.setImageURL(snake.getImageURL());
+			managed.setLengthInCM(snake.getLengthInCM());
+			managed.setMorph(snake.getMorph());
+			managed.setName(snake.getName());
+			managed.setPurchasedFrom(snake.getPurchasedFrom());
+			managed.setSpeciesId(snake.getSpeciesId());
+			managed.setWeightInGrams(snake.getWeightInGrams());
+			em.persist(managed);
+			em.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 		return true;
 	}
 }

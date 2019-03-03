@@ -24,7 +24,7 @@ td a:hover, th a:hover {
 	color: #8EE4AF
 }
 
-#dropdownMenuButton {
+#greenButton {
 	background-color: #379683
 }
 
@@ -35,8 +35,10 @@ td a:hover, th a:hover {
 	float: left;
 }
 
-/* 05386B
-379683
-5CDB95
-8EE4AF
-EDF5E1 */
+form textarea{
+	height:150px;
+}
+
+.result{
+	color:red
+}

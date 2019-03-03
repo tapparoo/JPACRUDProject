@@ -3,8 +3,10 @@ package com.skilldistillery.bootmvcsnakes.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.bootmvcsnakes.data.SnakeDAO;
 import com.skilldistillery.jpasnakes.entities.Snake;
@@ -15,35 +17,48 @@ public class SnakeController {
 	SnakeDAO dao;
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
-	public String index(Model model) {
+	public String index(Model model, @ModelAttribute("result")String result) {
+		if(result != null) {
+			model.addAttribute("result", result);
+		}
 		model.addAttribute("allSnakes", dao.getAllSnakes());
+		model.addAttribute("allSpecies", dao.getAllSpecies());
 		return "index";
 	}
 
 	@RequestMapping(path = "getSnakeById.do", method = RequestMethod.GET)
-	public String getSnakeById(Model model, int id) {
+	public String getSnakeById(Model model, @ModelAttribute("id")Integer id) {
+		String result = null;
 		Snake snake = dao.getSnakeById(id);
-		model.addAttribute("snake", snake);
-		if (snake != null) {
-			model.addAttribute("species", dao.getSpeciesById(snake.getSpeciesId()));
+		
+		if(snake == null) {
+			result = "No snake found with ID " + id;
+			model.addAttribute("result", result);
+			model.addAttribute("allSnakes", dao.getAllSnakes());
+			model.addAttribute("allSpecies", dao.getAllSpecies());
+			return "index";
 		}
+			
+		model.addAttribute("snake", snake);
+		model.addAttribute("allSpecies", dao.getAllSpecies());
 		return "snake";
 	}
 
 	@RequestMapping(path = "addSnake.do", method = RequestMethod.POST)
-	public String addSnake(Snake snake) {
-		String result = null;
-		
+	public String addSnake(Snake snake, RedirectAttributes redir) {
+		snake = dao.addSnake(snake);
 		if(snake != null) {
-			dao.addSnake(snake);
+			redir.addFlashAttribute("id", snake.getId());
+			redir.addFlashAttribute("allSpecies", dao.getAllSpecies());
+			return "redirect:getSnakeById.do";
+		}else {
+			redir.addFlashAttribute("result", "Failed to add record");
 		}
 		return "redirect:/";
 	}
 	
 	@RequestMapping(path = "deleteSnake.do", method = RequestMethod.POST)
 	public String deleteSnake(Snake snake) {
-		String result = null;
-		
 		if(snake != null) {
 			dao.deleteSnake(snake);
 		}
@@ -51,12 +66,17 @@ public class SnakeController {
 	}
 	
 	@RequestMapping(path = "modifySnake.do", method = RequestMethod.POST)
-	public String modifySnake(Snake snake) {
+	public String modifySnake(Snake snake, RedirectAttributes redir) {
 		String result = null;
 		
 		if(snake != null) {
-			dao.modifySnake(snake);
+			if(dao.modifySnake(snake)) {
+				result = "Update successfull";
+			}else {
+				result = "Update failed";
+			}
 		}
-		return "redirect:/";
+		redir.addFlashAttribute("result", result);
+		return "redirect:getSnakeById.do?id=" + snake.getId();
 	}
 }
