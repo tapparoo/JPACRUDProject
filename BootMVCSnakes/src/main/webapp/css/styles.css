@@ -1,0 +1,42 @@
+body {
+	text-align: center;
+	background-color: #8EE4AF;
+}
+
+h1 {
+	background-color: #05386B;
+	color: #EDF5E1;
+	padding: 20px;
+}
+
+.table {
+	background-color: #05386B;
+	color: #EDF5E1;
+	border: thin black solid;
+	margin-top: 30px;
+}
+
+td a, th a, td a:visited, th a:visited {
+	color: #EDF5E1
+}
+
+td a:hover, th a:hover {
+	color: #8EE4AF
+}
+
+#dropdownMenuButton {
+	background-color: #379683
+}
+
+.label-text-align {
+	float: right;
+}
+.input-text-align {
+	float: left;
+}
+
+/* 05386B
+379683
+5CDB95
+8EE4AF
+EDF5E1 */

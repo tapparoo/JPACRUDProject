@@ -29,4 +29,34 @@ public class SnakeController {
 		}
 		return "snake";
 	}
+
+	@RequestMapping(path = "addSnake.do", method = RequestMethod.POST)
+	public String addSnake(Snake snake) {
+		String result = null;
+		
+		if(snake != null) {
+			dao.addSnake(snake);
+		}
+		return "redirect:/";
+	}
+	
+	@RequestMapping(path = "deleteSnake.do", method = RequestMethod.POST)
+	public String deleteSnake(Snake snake) {
+		String result = null;
+		
+		if(snake != null) {
+			dao.deleteSnake(snake);
+		}
+		return "redirect:/";
+	}
+	
+	@RequestMapping(path = "modifySnake.do", method = RequestMethod.POST)
+	public String modifySnake(Snake snake) {
+		String result = null;
+		
+		if(snake != null) {
+			dao.modifySnake(snake);
+		}
+		return "redirect:/";
+	}
 }

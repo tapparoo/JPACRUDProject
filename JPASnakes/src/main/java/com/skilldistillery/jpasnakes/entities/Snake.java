@@ -109,8 +109,9 @@ public class Snake {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setDateOfBirth(String dateOfBirth) {
+		String[] arr = dateOfBirth.split("-");
+		this.dateOfBirth = LocalDate.of(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
 	}
 	
 	public Species getSpecies() {

@@ -33,4 +33,33 @@ public class SnakeDAOImpl implements SnakeDAO {
 		List<Snake> list = em.createQuery(query, Snake.class).getResultList();
 		return list;
 	}
+
+	@Override
+	public Integer addSnake(Snake snake) {
+		em.persist(snake);
+		em.flush();
+		return 1;
+	}
+	
+	@Override
+	public boolean deleteSnake(Snake snake) {
+		em.remove(snake);
+		return true;
+	}
+
+	@Override
+	public boolean modifySnake(Snake snake) {
+		Snake managed = em.find(Snake.class, snake.getId());
+		managed.setDateOfBirth(snake.getDateOfBirth().toString());
+		managed.setImageURL(snake.getImageURL());
+		managed.setLengthInCM(snake.getLengthInCM());
+		managed.setMorph(snake.getMorph());
+		managed.setName(snake.getName());
+		managed.setPurchasedFrom(snake.getPurchasedFrom());
+		managed.setSpeciesId(snake.getSpeciesId());
+		managed.setWeightInGrams(snake.getWeightInGrams());
+		em.persist(managed);
+		em.flush();
+		return true;
+	}
 }
