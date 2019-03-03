@@ -16,15 +16,17 @@
 </head>
 <body>
 
-	<h1>Spring Boot MVC Snake Database App</h1>
+	<h1><a href="/">Spring Boot MVC Snake Database App</a></h1>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-4">
 				<h5>Search records by id</h5>
 				<form action="getSnakeById.do" method="GET">
-					<input type="number" min="1" max="500000"name="id" size="5" required value="0"> <input type="submit">
+					<input type="number" min="1" max="500000" name="id" size="5"
+						required value="0"> <input type="submit">
 					<c:if test="${not empty result }">
-						<br><div class="result">${result}</div>
+						<br>
+						<div class="result">${result}</div>
 					</c:if>
 				</form>
 			</div>
@@ -33,16 +35,16 @@
 				<select onchange="window.location.href=this.value">
 					<c:forEach var="s" items="${allSnakes}">
 						<option value="getSnakeById.do?id=${s.id}">${s.id}:
-							${s.name}(${s.species.name})</option>
+							${s.name} (${s.species.name})</option>
 					</c:forEach>
 				</select>
 			</div>
 			<!--  "Add Snake" Dropdown/Form -->
 			<div class="dropdown col-4">
 				<br>
-				<button class="btn dropdown-toggle" type="button"
-					id="greenButton" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">Add Record</button>
+				<button class="btn dropdown-toggle" type="button" id="greenButton"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add
+					Record</button>
 				<div class="dropdown-menu">
 					<form action="addSnake.do" method="POST" class="px-4 py-3">
 						<div class="form-group">
@@ -52,26 +54,46 @@
 						<div class="form-group">
 							<label for="dateOfBirth">Date of Birth</label> <input type="date"
 								class="form-control" name="dateOfBirth" value="2019-01-01"
-      								min="1990-01-01" max="2030-01-01">
+								min="1990-01-01" max="2030-01-01">
 						</div>
 						<div class="form-group">
 							<select name="speciesId">
-									<c:forEach var="species" items="${allSpecies}">
-										<option value="${species.id}"
-											<c:if test="${snake.speciesId == species.id }">selected</c:if>>${species.name}</option>
-									</c:forEach>
+								<c:forEach var="species" items="${allSpecies}">
+									<option value="${species.id}"
+										<c:if test="${snake.speciesId == species.id }">selected</c:if>>${species.name}</option>
+								</c:forEach>
 							</select>
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>
 			</div>
-			
+
 
 		</div>
 
 
 		<!-- Snake table -->
+		<br>
+		<br>
+		<div class="row">
+			<div class="col">
+				<label class="label-text-align">View Snakes by:</label>
+			</div>
+			<select name="tableFilterOption" class="col-auto input-text-align"
+				onchange="window.location.href=this.value">
+				<option value="/">(None)</option>
+				<option value="FilterTable.do?tableFilterOption=all"
+					<c:if test="${filterChoice == 'all'}">selected</c:if>>View
+					All Snakes</option>
+
+				<c:forEach var="species" items="${allSpecies}">
+					<option value="FilterTable.do?tableFilterOption=${species.name}"
+						<c:if test="${filterChoice == species.name }">selected</c:if>>${species.name}</option>
+				</c:forEach>
+			</select>
+			<div class="col"></div>
+		</div>
 		<table class="table table-bordered col-10 offset-1">
 			<thead>
 				<tr>
@@ -82,9 +104,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="snake" items="${allSnakes}">
+				<c:forEach var="snake" items="${filteredSnakes}">
 					<tr>
-						<th scope="row"><a href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.id}</a></th>
+						<th scope="row"><a
+							href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.id}</a></th>
 						<td><a href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.name}</a></td>
 						<td><a href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.species.name}</a></td>
 						<td>

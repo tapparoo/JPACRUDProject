@@ -8,12 +8,18 @@ h1 {
 	color: #EDF5E1;
 	padding: 20px;
 }
+h1 a, h1 a:hover, h1 a:visited{
+	background-color: #05386B;
+	color: #EDF5E1;
+	padding: 20px;
+	text-decoration:none
+}
 
 .table {
 	background-color: #05386B;
 	color: #EDF5E1;
 	border: thin black solid;
-	margin-top: 30px;
+	margin-top: 20px;
 }
 
 td a, th a, td a:visited, th a:visited {

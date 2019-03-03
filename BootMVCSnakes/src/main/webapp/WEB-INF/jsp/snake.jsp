@@ -16,11 +16,9 @@
 
 <body>
 
+	<h1 class="col-12">${snake.species.name }</h1>
 	<div class="container">
 		<c:if test="${not empty snake }">
-			<div class="row">
-				<h1 class="col-12">${snake.species.name }</h1>
-			</div>
 			<div class="row">
 
 				<div class="col-sm-6 col-md-6 col-lg-6">

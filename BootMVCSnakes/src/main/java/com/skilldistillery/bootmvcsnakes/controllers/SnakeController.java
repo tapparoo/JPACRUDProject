@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.bootmvcsnakes.data.SnakeDAO;
@@ -23,6 +24,16 @@ public class SnakeController {
 		}
 		model.addAttribute("allSnakes", dao.getAllSnakes());
 		model.addAttribute("allSpecies", dao.getAllSpecies());
+		return "index";
+	}
+
+	@RequestMapping(path = "FilterTable.do", method = RequestMethod.GET)
+	public String filter(Model model, @RequestParam("tableFilterOption")String option) {
+		System.out.println(option);
+		model.addAttribute("allSnakes", dao.getAllSnakes());
+		model.addAttribute("allSpecies", dao.getAllSpecies());
+		model.addAttribute("filteredSnakes", dao.getSnakesBySpeciesAsString(option));
+		model.addAttribute("filterChoice", option);
 		return "index";
 	}
 

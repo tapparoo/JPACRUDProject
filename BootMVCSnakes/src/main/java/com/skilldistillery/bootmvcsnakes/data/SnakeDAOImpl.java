@@ -16,7 +16,7 @@ import com.skilldistillery.jpasnakes.entities.Species;
 public class SnakeDAOImpl implements SnakeDAO {
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public Snake getSnakeById(int id) {
 		return em.find(Snake.class, id);
@@ -26,16 +26,16 @@ public class SnakeDAOImpl implements SnakeDAO {
 	public Species getSpeciesById(int id) {
 		return em.find(Species.class, id);
 	}
-	
+
 	@Override
-	public List<Snake> getAllSnakes(){
+	public List<Snake> getAllSnakes() {
 		String query = "SELECT snake FROM Snake snake";
 		List<Snake> list = em.createQuery(query, Snake.class).getResultList();
 		return list;
 	}
 
 	@Override
-	public List<Species> getAllSpecies(){
+	public List<Species> getAllSpecies() {
 		String query = "SELECT species FROM Species species";
 		List<Species> list = em.createQuery(query, Species.class).getResultList();
 		return list;
@@ -47,19 +47,18 @@ public class SnakeDAOImpl implements SnakeDAO {
 		em.flush();
 		return snake;
 	}
-	
-	
+
 	@Override
 	public boolean deleteSnake(Snake snake) {
 		Snake managed = em.find(Snake.class, snake.getId());
-		
-		if(managed == null) {
+
+		if (managed == null) {
 			return false;
 		}
-		
+
 		em.remove(managed);
-		
-		if(em.find(Snake.class, snake.getId()) != null) {
+
+		if (em.find(Snake.class, snake.getId()) != null) {
 			return false;
 		}
 		return true;
@@ -68,11 +67,11 @@ public class SnakeDAOImpl implements SnakeDAO {
 	@Override
 	public boolean modifySnake(Snake snake) {
 		Snake managed = em.find(Snake.class, snake.getId());
-		
-		if(managed == null) {
+
+		if (managed == null) {
 			return false;
 		}
-		
+
 		try {
 			managed.setDateOfBirth(snake.getDateOfBirth().toString());
 			managed.setImageURL(snake.getImageURL());
@@ -89,5 +88,20 @@ public class SnakeDAOImpl implements SnakeDAO {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public List<Snake> getSnakesBySpeciesAsString(String option) {
+		String query = "";
+		List<Snake> list = null;
+		
+		if (option.equalsIgnoreCase("all")) {
+			query = "SELECT snake FROM Snake snake";
+			list = em.createQuery(query, Snake.class).getResultList();
+		} else {
+			query = "SELECT snake FROM Snake snake WHERE snake.species.name = :option";
+			list = em.createQuery(query, Snake.class).setParameter("option", option).getResultList();
+		}
+		return list;
 	}
 }
