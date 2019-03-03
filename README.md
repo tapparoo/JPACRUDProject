@@ -16,6 +16,6 @@ Users can also:
 - Gradle (Build/Dependency Management)
 - Bootstrap (Front-End)
 
-![Add Record Dropdown](images/index-addRecordDropdown.png)
-![Filter Dropdown](images/index-filterDropdown.png)
-![Snake Details](images/snakeDetails.png)
+![Add Record Dropdown](BootMVCSnakes/src/main/webapp/images/index-addRecordDropdown.png)
+![Filter Dropdown](BootMVCSnakes/src/main/webapp/images/index-filterDropdown.png)
+![Snake Details](BootMVCSnakes/src/main/webapp/images/snakeDetails.png)
