@@ -33,6 +33,7 @@
 			<div class="col-4">
 				<h5>Select record from list</h5>
 				<select onchange="window.location.href=this.value">
+					<option value="/"></option>
 					<c:forEach var="s" items="${allSnakes}">
 						<option value="getSnakeById.do?id=${s.id}">${s.id}:
 							${s.name} (${s.species.name})</option>
