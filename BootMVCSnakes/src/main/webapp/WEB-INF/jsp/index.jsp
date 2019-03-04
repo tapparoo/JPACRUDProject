@@ -16,7 +16,9 @@
 </head>
 <body>
 
-	<h1><a href="/">Spring Boot MVC Snake Database App</a></h1>
+	<h1>
+		<a href="/">Spring Boot MVC Snake Database App</a>
+	</h1>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-4">
@@ -33,7 +35,7 @@
 			<div class="col-4">
 				<h5>Select record from list</h5>
 				<select onchange="window.location.href=this.value">
-					<option value="/"></option>
+					<option></option>
 					<c:forEach var="s" items="${allSnakes}">
 						<option value="getSnakeById.do?id=${s.id}">${s.id}:
 							${s.name} (${s.species.name})</option>
@@ -75,17 +77,15 @@
 
 
 		<!-- Snake table -->
-		<br>
-		<br>
+		<br> <br>
 		<div class="row">
 			<div class="col">
-				<label class="label-text-align">View Snakes by:</label>
+				<label class="label-text-align">Filter by:</label>
 			</div>
 			<select name="tableFilterOption" class="col-auto input-text-align"
 				onchange="window.location.href=this.value">
-				<option value="/">(None)</option>
 				<option value="FilterTable.do?tableFilterOption=all"
-					<c:if test="${filterChoice == 'all'}">selected</c:if>>View
+					<c:if test="${filterChoice == 'all' || empty filteredSnakes}">selected</c:if>>View
 					All Snakes</option>
 
 				<c:forEach var="species" items="${allSpecies}">
@@ -105,40 +105,45 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="snake" items="${filteredSnakes}">
-					<tr>
-						<th scope="row"><a
-							href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.id}</a></th>
-						<td><a href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.name}</a></td>
-						<td><a href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.species.name}</a></td>
-						<td>
-							<!--  Snake (or default species) image thumbnail --> <c:if
-								test="${not empty snake.imageURL}">
-								<img src="${snake.imageURL}" width="50px" data-toggle="modal"
-									data-target="#<c:out value='snake${snake.id}'/>" />
-							</c:if> <c:if test="${empty snake.imageURL }">
-								<img src="${snake.species.defaultImageURL}" width="50px"
-									data-toggle="modal"
-									data-target="#<c:out value='snake${snake.id}'/>" />
-							</c:if> <!--  Snake (or default species) popup image on click -->
-							<div id="snake${snake.id}" class="modal fade" tabindex="-1"
-								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-body">
-											<c:if test="${not empty snake.imageURL}">
-												<img src="${snake.imageURL}" class="img-fluid">
-											</c:if>
-											<c:if test="${empty snake.imageURL }">
-												<img src="${snake.species.defaultImageURL}"
-													class="img-fluid">
-											</c:if>
+				<c:forEach var="snake" items="${allSnakes}">
+					<c:if
+						test="${empty filteredSnakes || filterChoice == 'all' || filterChoice == snake.species.name }">
+						<tr>
+							<th scope="row"><a
+								href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.id}</a></th>
+							<td><a
+								href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.name}</a></td>
+							<td><a
+								href="getSnakeById.do?id=<c:out value="${snake.id}"/>">${snake.species.name}</a></td>
+							<td>
+								<!--  Snake (or default species) image thumbnail --> <c:if
+									test="${not empty snake.imageURL}">
+									<img src="${snake.imageURL}" width="50px" data-toggle="modal"
+										data-target="#<c:out value='snake${snake.id}'/>" />
+								</c:if> <c:if test="${empty snake.imageURL }">
+									<img src="${snake.species.defaultImageURL}" width="50px"
+										data-toggle="modal"
+										data-target="#<c:out value='snake${snake.id}'/>" />
+								</c:if> <!--  Snake (or default species) popup image on click -->
+								<div id="snake${snake.id}" class="modal fade" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-body">
+												<c:if test="${not empty snake.imageURL}">
+													<img src="${snake.imageURL}" class="img-fluid">
+												</c:if>
+												<c:if test="${empty snake.imageURL }">
+													<img src="${snake.species.defaultImageURL}"
+														class="img-fluid">
+												</c:if>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</td>
-					</tr>
+							</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</tbody>
 

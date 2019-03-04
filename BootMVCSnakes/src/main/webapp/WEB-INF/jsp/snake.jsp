@@ -22,7 +22,7 @@
 			<div class="row">
 
 				<div class="col-sm-6 col-md-6 col-lg-6">
-					<form action="modifySnake.do" method="POST">
+					<form id="snakeForm" action="modifySnake.do" method="POST">
 						<div class="row">
 							<div class="col-2">
 								<button class="btn btn-sm btn-secondary" id="greenButton"
@@ -32,7 +32,7 @@
 								<label class="label-text-align">ID:</label>
 							</div>
 							<div class="col-6">
-								<input type="text" class="input-text-align" name="id"
+								<input type="text" class="input-text-align " name="id"
 									value="${snake.id}" readonly="readonly" size="4" />
 							</div>
 						</div>
@@ -73,7 +73,7 @@
 									Date:</label>
 							</div>
 							<div class="col-6">
-								<input type="date" class="input-text-align" name="dateOfBirth"
+								<input type="date" class="input-text-align date" name="dateOfBirth"
 									value="${snake.dateOfBirth}" />
 							</div>
 						</div>
@@ -126,8 +126,8 @@
 									URL:</label>
 							</div>
 							<div class="col-6">
-								<textarea class="input-text-align" name="imageURL"
-									placeholder="Default ${snake.species.name} image is being used">${snake.imageURL}</textarea>
+								<input type="text" class="input-text-align" name="imageURL"
+									placeholder="Default ${snake.species.name} image is being used" value="${snake.imageURL}"/>
 							</div>
 						</div>
 						<br>

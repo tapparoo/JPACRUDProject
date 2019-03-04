@@ -41,8 +41,16 @@ td a:hover, th a:hover {
 	float: left;
 }
 
-form textarea{
-	height:150px;
+#snakeForm{
+    color: #05386b;
+}
+
+#snakeForm input, #snakeForm select{
+	min-width: 90%;
+	line-height: 0;
+}
+#snakeForm .date {
+	line-height: 1 !important;
 }
 
 .result{
