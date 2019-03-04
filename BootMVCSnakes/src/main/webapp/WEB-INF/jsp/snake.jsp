@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Sprint Boot MVC Snake Database App</title>
 <jsp:include page="bootstrapHead.jsp"></jsp:include>
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v=2">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 		<c:if test="${not empty snake }">
 			<div class="row">
 
-				<div class="col-sm-6 col-md-6 col-lg-6">
+				<div class="col-sm-6 col-md-6 col-lg-6 form-group">
 					<form id="snakeForm" action="modifySnake.do" method="POST">
 						<div class="row">
 							<div class="col-2">
@@ -29,7 +29,7 @@
 								<label class="label-text-align">ID:</label>
 							</div>
 							<div class="col-6">
-								<input type="text" class="input-text-align " name="id"
+								<input type="text" class="input-text-align form-control " name="id"
 									value="${snake.id}" readonly="readonly" size="4" />
 							</div>
 						</div>
@@ -38,7 +38,7 @@
 								<label for="name" class="label-text-align">Pet Name:</label>
 							</div>
 							<div class="col-6">
-								<input type="text" class="input-text-align" name="name"
+								<input type="text" class="input-text-align form-control" name="name"
 									value="${snake.name}" />
 							</div>
 						</div>
@@ -70,7 +70,7 @@
 									Date:</label>
 							</div>
 							<div class="col-6">
-								<input type="date" class="input-text-align date" name="dateOfBirth"
+								<input type="date" class="input-text-align form-control date" name="dateOfBirth"
 									value="${snake.dateOfBirth}" />
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 								<label for="morph" class="label-text-align">Morph:</label>
 							</div>
 							<div class="col-6">
-								<input type="text" class="input-text-align" name="morph"
+								<input type="text" class="input-text-align form-control" name="morph"
 									value="${snake.morph}" />
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 								<label for="weightInGrams" class="label-text-align">Weight(g):</label>
 							</div>
 							<div class="col-6">
-								<input type="number" min="0.0" class="input-text-align"
+								<input type="number" min="0.0" class="input-text-align form-control"
 									name="weightInGrams" step="0.01" value="${snake.weightInGrams}" />
 							</div>
 						</div>
@@ -98,7 +98,7 @@
 							</div>
 							<div class="col-6">
 								<input type="number" min="0.0" step="0.01"
-									class="input-text-align" name="lengthInCM"
+									class="input-text-align form-control" name="lengthInCM"
 									value="${snake.lengthInCM}" />
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 								</label>
 							</div>
 							<div class="col-6">
-								<input type="text" class="input-text-align" name="purchasedFrom"
+								<input type="text" class="input-text-align form-control" name="purchasedFrom"
 									value="${snake.purchasedFrom}" />
 							</div>
 						</div>
@@ -123,7 +123,7 @@
 									URL:</label>
 							</div>
 							<div class="col-6">
-								<input type="text" class="input-text-align" name="imageURL"
+								<input type="text" class="input-text-align form-control" name="imageURL"
 									placeholder="Default ${snake.species.name} image is being used" value="${snake.imageURL}"/>
 							</div>
 						</div>

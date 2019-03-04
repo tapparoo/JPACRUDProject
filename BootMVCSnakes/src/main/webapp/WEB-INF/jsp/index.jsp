@@ -10,7 +10,7 @@
 <title>Snake Database</title>
 <jsp:include page="bootstrapHead.jsp"></jsp:include>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v=2">
 </head>
 <body>
 
@@ -19,10 +19,10 @@
 			<a href="home.do">Spring Boot MVC Snake Database App</a>
 		</h1>
 		<div class="row">
-			<div class="col-4">
+			<div class="col-4 form-group">
 				<h5>Search records by id</h5>
 				<form action="getSnakeById.do" method="GET">
-					<input type="number" min="1" max="500000" name="id" size="5"
+					<input class="form-control" type="number" min="1" max="500000" name="id" size="5"
 						required value="0"> <input type="submit">
 					<c:if test="${not empty result }">
 						<br>
@@ -30,9 +30,9 @@
 					</c:if>
 				</form>
 			</div>
-			<div class="col-4">
+			<div class="col-4 form-group">
 				<h5>Select record from list</h5>
-				<select onchange="window.location.href=this.value">
+				<select class="form-control" onchange="window.location.href=this.value">
 					<option></option>
 					<c:forEach var="s" items="${allSnakes}">
 						<option value="getSnakeById.do?id=${s.id}">${s.id}:
@@ -44,7 +44,7 @@
 			<div class="dropdown col-4">
 				<br>
 				<button class="btn dropdown-toggle" type="button" id="greenButton"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add<br>
 					Record</button>
 				<div class="dropdown-menu">
 					<form action="addSnake.do" method="POST" class="px-4 py-3">
