@@ -3,6 +3,13 @@ plugins {
 	id 'java'
 }
 
+apply plugin: 'war'
+war {
+  enabled = true
+  archiveName = "${baseName}.war"     // Our app name, as defined in settings.gradle
+  destinationDir = file("./")      // WAR folder under project root directory
+}
+
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.skilldistillery'
@@ -23,4 +30,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// Make sure the Boot app's embedded tomcat doesn't interfere with the Tomcat server we'll deploy it to
+	implementation ('org.springframework.boot:spring-boot-starter-tomcat') 
 }
