@@ -13,8 +13,8 @@
 
 <body>
 
-	<h1 class="col-12">${snake.species.name }</h1>
 	<div class="container">
+		<h1 class="col-12">${snake.species.name }</h1>
 		<c:if test="${not empty snake }">
 			<div class="row">
 
@@ -23,7 +23,7 @@
 						<div class="row">
 							<div class="col-2">
 								<button class="btn btn-sm btn-secondary" id="greenButton"
-									formaction="/" formmethod="GET">Home</button>
+									formaction="home.do" formmethod="GET">Home</button>
 							</div>
 							<div class="col-4">
 								<label class="label-text-align">ID:</label>

@@ -17,7 +17,7 @@ public class SnakeController {
 	@Autowired
 	SnakeDAO dao;
 
-	@RequestMapping(path = "/", method = RequestMethod.GET)
+	@RequestMapping(path = {"/", "home.do"}, method = RequestMethod.GET)
 	public String index(Model model, @ModelAttribute("result")String result) {
 		if(result != null) {
 			model.addAttribute("result", result);

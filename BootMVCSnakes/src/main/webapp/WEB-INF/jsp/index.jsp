@@ -14,10 +14,10 @@
 </head>
 <body>
 
-	<h1>
-		<a href="/">Spring Boot MVC Snake Database App</a>
-	</h1>
-	<div class="container-fluid">
+	<div class="container">
+		<h1>
+			<a href="home.do">Spring Boot MVC Snake Database App</a>
+		</h1>
 		<div class="row">
 			<div class="col-4">
 				<h5>Search records by id</h5>
@@ -93,7 +93,7 @@
 			</select>
 			<div class="col"></div>
 		</div>
-		<table class="table table-bordered col-10 offset-1">
+		<table class="table table-bordered col ">
 			<thead>
 				<tr>
 					<th scope="col">ID</th>
