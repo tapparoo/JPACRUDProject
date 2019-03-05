@@ -19,20 +19,33 @@
 			<a href="home.do">Spring Boot MVC Snake Database App</a>
 		</h1>
 		<div class="row">
-			<div class="col-4 form-group">
-				<h5>Search records by id</h5>
-				<form action="getSnakeById.do" method="GET">
-					<input class="form-control" type="number" min="1" max="500000" name="id" size="5"
-						required value="0"> <input type="submit">
-					<c:if test="${not empty result }">
-						<br>
-						<div class="result">${result}</div>
-					</c:if>
-				</form>
+			<div class="col-4">
+				<div class="row">
+					<h5 class="col-12">Search records by id</h5>
+				</div>
+				<div class="row">
+					<form action="getSnakeById.do" method="GET">
+						<div class="input-group col-sm-12 offset-md-3">
+							<input type="number" min="1" max="500000" name="id" size="5"
+								class="form-control " required value="0"
+								aria-label="Input group example"
+								aria-describedby="btnGroupAddon2"> <input
+								id="btnGroupAddon2"
+								class="input-group-append input-group-text btn btn-sm greenButton"
+								type="submit">
+
+						</div>
+						<c:if test="${not empty result }">
+							<br>
+							<div class="result">${result}</div>
+						</c:if>
+					</form>
+				</div>
 			</div>
 			<div class="col-4 form-group">
 				<h5>Select record from list</h5>
-				<select class="form-control" onchange="window.location.href=this.value">
+				<select class="form-control col-md-6 offset-md-3"
+					onchange="window.location.href=this.value">
 					<option></option>
 					<c:forEach var="s" items="${allSnakes}">
 						<option value="getSnakeById.do?id=${s.id}">${s.id}:
@@ -43,9 +56,10 @@
 			<!--  "Add Snake" Dropdown/Form -->
 			<div class="dropdown col-4">
 				<br>
-				<button class="btn dropdown-toggle" type="button" id="greenButton"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add<br>
-					Record</button>
+				<button class="btn dropdown-toggle greenButton" type="button"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Add<br>Record
+				</button>
 				<div class="dropdown-menu">
 					<form action="addSnake.do" method="POST" class="px-4 py-3">
 						<div class="form-group">
@@ -77,21 +91,22 @@
 		<!-- Snake table -->
 		<br> <br>
 		<div class="row">
-			<div class="col">
-				<label class="label-text-align">Filter by:</label>
+			<div class="col-2 offset-md-3">
+				<label class="label-text-align" for="tableFilter">Filter by:</label>
 			</div>
-			<select name="tableFilterOption" class="col-auto input-text-align"
-				onchange="window.location.href=this.value">
-				<option value="FilterTable.do?tableFilterOption=all"
-					<c:if test="${filterChoice == 'all' || empty filteredSnakes}">selected</c:if>>View
-					All Snakes</option>
+			<div class="col-auto">
+				<select id="tableFilter" name="tableFilterOption"
+					class="form-control" onchange="window.location.href=this.value">
+					<option value="FilterTable.do?tableFilterOption=all"
+						<c:if test="${filterChoice == 'all' || empty filteredSnakes}">selected</c:if>>View
+						All Snakes</option>
 
-				<c:forEach var="species" items="${allSpecies}">
-					<option value="FilterTable.do?tableFilterOption=${species.name}"
-						<c:if test="${filterChoice == species.name }">selected</c:if>>${species.name}</option>
-				</c:forEach>
-			</select>
-			<div class="col"></div>
+					<c:forEach var="species" items="${allSpecies}">
+						<option value="FilterTable.do?tableFilterOption=${species.name}"
+							<c:if test="${filterChoice == species.name }">selected</c:if>>${species.name}</option>
+					</c:forEach>
+				</select>
+			</div>
 		</div>
 		<table class="table table-bordered col ">
 			<thead>

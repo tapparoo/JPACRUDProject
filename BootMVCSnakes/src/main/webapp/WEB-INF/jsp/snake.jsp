@@ -22,7 +22,7 @@
 					<form id="snakeForm" action="modifySnake.do" method="POST">
 						<div class="row">
 							<div class="col-2">
-								<button class="btn btn-sm btn-secondary" id="greenButton"
+								<button class="btn btn-sm btn-secondary greenButton"
 									formaction="home.do" formmethod="GET">Home</button>
 							</div>
 							<div class="col-4">
